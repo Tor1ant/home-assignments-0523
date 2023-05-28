@@ -16,7 +16,6 @@ public class NodImpl implements Nod {
      * @param second второе число.
      * @return наибольший общий делитель двух аргументов метода в виде примитива int.
      */
-
     @Override
     public int calculate(int first, int second) {
         if (first == 0 && second == 0) {
@@ -34,6 +33,4 @@ public class NodImpl implements Nod {
         }
         return calculate(second, first % second);
     }
-
-
 }
