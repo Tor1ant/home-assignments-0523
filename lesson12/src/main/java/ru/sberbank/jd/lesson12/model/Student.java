@@ -3,10 +3,16 @@ package ru.sberbank.jd.lesson12.model;
 
 import java.util.Date;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Класс, отражающий структуру хранимых в таблице полей.
  */
+@Data
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Student {
 
     /*
@@ -17,13 +23,8 @@ public class Student {
      * иметь значение id.
      */
     private UUID id;
-
-    private String firstName;
-
-    private String lastName;
-
-    private Date birthDate;
-
-    private boolean isGraduated;
-
+    private final String firstName;
+    private final String lastName;
+    private  Date birthDate;
+    private final boolean isGraduated;
 }
