@@ -65,7 +65,6 @@ public class StatsServiceImpl implements StatsService {
                         countries.put(country.getName(), country);
                     }
                 }));
-
         return countries;
     }
 
