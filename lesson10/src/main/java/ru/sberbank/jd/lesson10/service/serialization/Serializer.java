@@ -7,5 +7,5 @@ import ru.sberbank.jd.lesson10.output.Registry;
  */
 public interface Serializer {
 
-    String serialize(Registry registry, String filename);
+    boolean serialize(Registry registry, String filename);
 }

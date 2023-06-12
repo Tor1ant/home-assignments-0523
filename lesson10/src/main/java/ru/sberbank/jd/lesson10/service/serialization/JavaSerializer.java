@@ -16,20 +16,18 @@ public class JavaSerializer implements Serializer {
      *
      * @param registry объект реестра для сериализации
      * @param filePath путь к файлу, в который будет произведена сериализация
-     * @return строковое представление сериализованного объекта
+     * @return true, если сериализация прошла успешно
      * @throws RuntimeException если произошла ошибка ввода-вывода во время сериализации
      */
     @Override
-    public String serialize(Registry registry, String filePath) {
-        String result;
+    public boolean serialize(Registry registry, String filePath) {
         try (FileOutputStream fileOut = new FileOutputStream(filePath);
                 ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
             objectOut.writeObject(registry);
-            result = objectOut.toString();
             System.out.println("Объект " + objectOut + " успешно сериализован в файл " + filePath);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
-        return result;
+        return true;
     }
 }

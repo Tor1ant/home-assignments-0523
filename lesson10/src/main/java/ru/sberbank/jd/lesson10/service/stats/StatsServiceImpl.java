@@ -22,8 +22,8 @@ public class StatsServiceImpl implements StatsService {
      * @param cds список CD
      * @return Map, где ключом является название альбома, а значением - объект Album
      */
-    @Override
-    public Map<String, Album> getAlbumStats(List<Cd> cds) {
+
+    private Map<String, Album> getAlbumStats(List<Cd> cds) {
         return cds.stream().map(cd -> new Album(cd.getTitle(), cd.getYear()))
                 .collect(Collectors.toMap(Album::getName, album -> album));
     }
@@ -35,8 +35,8 @@ public class StatsServiceImpl implements StatsService {
      * @param albums Map альбомов
      * @return Map, где ключом является имя артиста, а значением - объект Artist
      */
-    @Override
-    public Map<String, Artist> getArtistStats(List<Cd> cds, Map<String, Album> albums) {
+
+    private Map<String, Artist> getArtistStats(List<Cd> cds, Map<String, Album> albums) {
         Map<String, Artist> artistMap = new HashMap<>();
         cds.forEach(cd -> {
             Artist artist = artistMap.get(cd.getArtist());
@@ -56,8 +56,8 @@ public class StatsServiceImpl implements StatsService {
      * @param artists Map артистов
      * @return Map, где ключом является название страны, а значением - объект Country
      */
-    @Override
-    public Map<String, Country> getCountryStats(List<Cd> cds, Map<String, Artist> artists) {
+
+    private Map<String, Country> getCountryStats(List<Cd> cds, Map<String, Artist> artists) {
         Map<String, Country> countries = new HashMap<>();
         cds.stream()
                 .map(cd -> new Country(cd.getCountry()))
@@ -75,11 +75,13 @@ public class StatsServiceImpl implements StatsService {
      * Возвращает объект Registry, содержащий статистические данные.
      *
      * @param cds       список CD, не используется сейчас, но может пригодиться при расширении программы
-     * @param countries Map стран
      * @return объект Registry
      */
     @Override
-    public Registry getRegistry(List<Cd> cds, Map<String, Country> countries) {
-        return new Registry(countries.size(), new ArrayList<>(countries.values()));
+    public Registry getRegistry(List<Cd> cds) {
+        Map<String, Album> albumStats = getAlbumStats(cds);
+        Map<String, Artist> artistStats = getArtistStats(cds, albumStats);
+        Map<String, Country> countryStats = getCountryStats(cds, artistStats);
+        return new Registry(countryStats.size(), new ArrayList<>(countryStats.values()));
     }
 }

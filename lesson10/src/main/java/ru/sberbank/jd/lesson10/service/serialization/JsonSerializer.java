@@ -16,17 +16,16 @@ public class JsonSerializer implements Serializer {
      *
      * @param registry объект `Registry` для сериализации
      * @param filename путь к файлу, в который будет сохранен результат сериализации
-     * @return строка с информацией об успешной сериализации
+     * @return true, если сериализация прошла успешно
      * @throws RuntimeException если возникла ошибка во время сериализации
      */
     @Override
-    public String serialize(Registry registry, String filename) {
-        String result = "Объект записан в файл " + filename;
+    public boolean serialize(Registry registry, String filename) {
         try {
             objectMapper.writeValue(new File(filename), registry);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return result;
+        return true;
     }
 }

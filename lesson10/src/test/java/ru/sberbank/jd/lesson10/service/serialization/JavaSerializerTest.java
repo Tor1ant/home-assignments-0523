@@ -44,9 +44,9 @@ class JavaSerializerTest {
     @Test
     void serializeTest() throws IOException, ClassNotFoundException {
         String filePath = "src/test/resources/output/outputForTests/javaSerializerResult";
-        String serialize = javaSerializer.serialize(registry, filePath);
+        boolean serialize = javaSerializer.serialize(registry, filePath);
         Registry registryAfterSerialize;
-        Assertions.assertTrue(serialize.contains("java.io.ObjectOutputStream"));
+        Assertions.assertTrue(serialize);
 
         try (FileInputStream fileIn = new FileInputStream(filePath);
                 ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {

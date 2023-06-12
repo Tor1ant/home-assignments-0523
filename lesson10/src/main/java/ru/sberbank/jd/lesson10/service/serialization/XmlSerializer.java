@@ -17,11 +17,11 @@ public class XmlSerializer implements Serializer {
      *
      * @param registry объект типа `Registry`, который необходимо сериализовать
      * @param filename имя файла, в который будет записан XML-контент
-     * @return строковое представление сериализованного XML-контента
+     * @return true, если сериализация прошла успешно
      * @throws RuntimeException в случае ошибки при сериализации или записи в файл
      */
     @Override
-    public String serialize(Registry registry, String filename) {
+    public boolean serialize(Registry registry, String filename) {
         String xmlString;
         try {
             xmlString = xmlMapper.writeValueAsString(registry);
@@ -32,6 +32,6 @@ public class XmlSerializer implements Serializer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return xmlString;
+        return true;
     }
 }
