@@ -29,7 +29,6 @@ public class Main {
      * @param args Аргументы командной строки (не используются).
      */
     public static void main(String[] args) {
-
         XmlDeserializer xmlDeserializer = new XmlDeserializer();
         StatsService statsService = new StatsServiceImpl();
         Serializer javaSerializer = new JavaSerializer();

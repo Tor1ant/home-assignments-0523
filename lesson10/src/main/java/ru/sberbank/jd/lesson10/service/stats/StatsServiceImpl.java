@@ -37,13 +37,16 @@ public class StatsServiceImpl implements StatsService {
      */
     @Override
     public Map<String, Artist> getArtistStats(List<Cd> cds, Map<String, Album> albums) {
-        return cds.stream()
-                .map(cd -> new Artist(cd.getArtist()))
-                .collect(Collectors.toMap(Artist::getName, artist -> artist, (existingArtist, newArtist) -> {
-                            existingArtist.getAlbums().addAll(newArtist.getAlbums());
-                            return existingArtist;
-                        }
-                ));
+        Map<String, Artist> artistMap = new HashMap<>();
+        cds.forEach(cd -> {
+            Artist artist = artistMap.get(cd.getArtist());
+            if (artist == null) {
+                artist = new Artist(cd.getArtist());
+                artistMap.put(cd.getArtist(), artist);
+            }
+            artist.getAlbums().add(albums.get(cd.getTitle()));
+        });
+        return artistMap;
     }
 
     /**
