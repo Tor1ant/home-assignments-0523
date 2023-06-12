@@ -71,7 +71,7 @@ public class StatsServiceImpl implements StatsService {
     /**
      * Возвращает объект Registry, содержащий статистические данные.
      *
-     * @param cds       список CD
+     * @param cds       список CD, не используется сейчас, но может пригодиться при расширении программы
      * @param countries Map стран
      * @return объект Registry
      */
