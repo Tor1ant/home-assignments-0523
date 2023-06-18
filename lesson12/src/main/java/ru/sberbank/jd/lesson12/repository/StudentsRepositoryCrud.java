@@ -1,4 +1,4 @@
-package ru.sberbank.jd.lesson12;
+package ru.sberbank.jd.lesson12.repository;
 
 import java.util.List;
 import java.util.UUID;
