@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+</head>
+<body>
+<input id="task-input" type="text">
+<button id="add-task-btn">Добавить задачу</button>
+<ul id="task-list"></ul>
+<link rel="stylesheet" href="../styleCSS/style.css">
+
+<script>
+  const input = document.getElementById('task-input');
+  const addTaskBtn = document.getElementById('add-task-btn');
+  const taskList = document.getElementById('task-list');
+
+  function addTask() {
+    if (input.value.trim() !== '') {
+      const newTask = document.createElement('li');
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      newTask.appendChild(checkbox);
+
+      newTask.append(document.createTextNode(input.value));
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerText = 'Удалить';
+      deleteBtn.addEventListener('click', function () {
+        taskList.removeChild(newTask);
+      });
+      newTask.appendChild(deleteBtn);
+
+      taskList.appendChild(newTask);
+      input.value = '';
+    }
+  }
+
+  addTaskBtn.addEventListener('click', addTask);
+</script>
+</body>
+</html>
